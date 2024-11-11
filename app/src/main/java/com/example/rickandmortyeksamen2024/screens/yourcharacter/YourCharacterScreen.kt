@@ -1,0 +1,114 @@
+package com.example.rickandmortyeksamen2024.screens.yourcharacter
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.example.rickandmortyeksamen2024.components.CharacterItem
+import com.example.rickandmortyeksamen2024.components.DeleteCharacterItem
+import com.example.rickandmortyeksamen2024.data.Character
+import com.example.rickandmortyeksamen2024.data.CreateCharacter
+import kotlinx.coroutines.delay
+
+@Composable
+fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
+
+
+    val character = yourCharacterViewModel.characters.collectAsState()
+    var showDeleteDialog by remember { mutableStateOf(false) }
+    var characterToDelete by remember { mutableStateOf<CreateCharacter?>(null) }
+    var message by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        message = true
+        delay(3000L)
+        yourCharacterViewModel.setCharacters()
+        message = false
+    }
+
+    Column {
+        Text(text = "Slett Karakter")
+
+        if (message == true) {
+            Text("henter karakterene fra databasen")
+        }
+
+        LazyColumn {
+            items(character.value) { character ->
+                DeleteCharacterItem(
+                    character,
+                    onDelete = {
+                        characterToDelete = character
+                        showDeleteDialog = true
+                    }
+                )
+            }
+        }
+
+        // bekreft sletting av karakter
+        if (showDeleteDialog && characterToDelete != null) {
+            AlertDialog(
+                onDismissRequest = { showDeleteDialog = false },
+                title = { Text(text = "Bekreft sletting") },
+                text = { Text("Er du sikker på at du vil slette ${characterToDelete?.name}?") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            characterToDelete?.let { yourCharacterViewModel.deleteCharacter(it) }
+                            showDeleteDialog = false
+                            characterToDelete = null
+                        }
+                    ) {
+                        Text("Ja")
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            showDeleteDialog = false
+                            characterToDelete = null
+                        }
+                    ) {
+                        Text("Nei")
+                    }
+                }
+            )
+        }
+    }
+}
+
+
+//    val characters = yourCharacterViewModel.characters.collectAsState().value
+//
+//    if (characters.isEmpty()) {
+//        Text("No characters available", style = MaterialTheme.typography.bodyLarge)
+//
+//    } else {
+//        LazyColumn {
+//            items(characters) { character ->
+//                CharacterItem(character = character)
+//            }
+//        }
+//    }
+//   }
+
+
+//@Composable
+//fun CharacterItem(character: CreateCharacter) {
+//    Column() {
+//        Text(text = character.name)
+//    }
+//
+//}
+//
+//
