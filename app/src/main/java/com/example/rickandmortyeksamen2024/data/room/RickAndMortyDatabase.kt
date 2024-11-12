@@ -6,8 +6,8 @@ import com.example.rickandmortyeksamen2024.data.CreateCharacter
 
 @Database(
     entities = [CreateCharacter::class],
-    version = 1,
-    exportSchema = false
+    version = 4,
+    exportSchema = true
 )
 abstract class RickAndMortyDatabase : RoomDatabase() {
 

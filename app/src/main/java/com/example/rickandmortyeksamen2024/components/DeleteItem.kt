@@ -13,6 +13,9 @@ import com.example.rickandmortyeksamen2024.data.CreateCharacter
 fun DeleteCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)? = null) {
     Column {
         Text(deleteCharacter.name)
+        Text(deleteCharacter.species)
+        Text(deleteCharacter.status)
+        Text(deleteCharacter.image)
         if (onDelete != null) {
             IconButton(onClick = { onDelete() }) {
                 Icon(imageVector = Icons.Filled.Delete, contentDescription = null)

@@ -8,6 +8,8 @@ data class CreateCharacter(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
+    val species: String,
+    val status: String,
     val image: String
 )
 

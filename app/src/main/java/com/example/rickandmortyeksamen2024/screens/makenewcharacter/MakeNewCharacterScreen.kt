@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -37,6 +38,15 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
     var name by remember {
         mutableStateOf("")
     }
+    var species by remember {
+        mutableStateOf("")
+    }
+    var status by remember {
+        mutableStateOf("")
+    }
+    var image by remember {
+        mutableStateOf("")
+    }
 
     // Meldingen til brukeren og karakterene er lagret
     var message by remember {
@@ -51,13 +61,35 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
             onValueChange = { name = it },
             label = { Text(text = "Navn") }
         )
+        TextField(
+            value = species,
+            onValueChange = { species = it },
+            label = { Text(text = "Type") }
+        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            RadioButton(
+                selected = (status == "Alive"),
+                onClick = { status = "Alive" })
+            Text(text = "Alive")
+            RadioButton(
+                selected = (status == "Dead"),
+                onClick = { status = "Dead" })
+            Text(text = "Dead")
+            
+        }
+        TextField(
+            value = image,
+            onValueChange = { image = it },
+            label = { Text(text = "Bilde") }
+        )
 
         Button(onClick = {
-            val newCharacter = CreateCharacter(name = name, image = "image")
+            val newCharacter = CreateCharacter(name = name, species = species, status = status, image = image)
             makeNewCharacterViewModel.insertCharachter(newCharacter)
             name = ""
             message = true
         })
+        
         {
             Text(text = "Lagre karakter i databasen")
         }
@@ -69,7 +101,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
         ) {
             Row(
                 modifier = Modifier
-                    .background(color = Color(0,128, 0))
+                    .background(color = Color(0, 128, 0))
                     .padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
