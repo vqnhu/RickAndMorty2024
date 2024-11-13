@@ -27,6 +27,9 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
     val character = yourCharacterViewModel.characters.collectAsState()
     var showDeleteDialog by remember { mutableStateOf(false) }
     var characterToDelete by remember { mutableStateOf<CreateCharacter?>(null) }
+    var deleteAllCharacters by remember { mutableStateOf(false) }
+
+
     var message by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
@@ -49,6 +52,10 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                     character,
                     onDelete = {
                         characterToDelete = character
+                        showDeleteDialog = true
+                    },
+                    deleteAllCharacters = {
+                        deleteAllCharacters = true
                         showDeleteDialog = true
                     }
                 )
@@ -77,6 +84,38 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                         onClick = {
                             showDeleteDialog = false
                             characterToDelete = null
+                        }
+                    ) {
+                        Text("Nei")
+                    }
+                }
+            )
+        }
+
+        //////////****************
+
+        // bekreft sletting av ALLE karakter
+        if (showDeleteDialog && deleteAllCharacters != null) {
+            AlertDialog(
+                onDismissRequest = { showDeleteDialog = false },
+                title = { Text(text = "Bekreft sletting") },
+                text = { Text("Er du sikker på at du vil slette ALLE karakterene?") },
+                confirmButton = {
+                    TextButton(
+                        onClick = {
+                            deleteAllCharacters?.let { yourCharacterViewModel.deleteAllCharacter() }
+                            showDeleteDialog = false
+                            deleteAllCharacters = false
+                        }
+                    ) {
+                        Text("Ja")
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = {
+                            showDeleteDialog = false
+                            deleteAllCharacters = false
                         }
                     ) {
                         Text("Nei")

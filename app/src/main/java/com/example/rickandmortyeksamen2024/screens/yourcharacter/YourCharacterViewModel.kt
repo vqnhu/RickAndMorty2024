@@ -41,6 +41,14 @@ class YourCharacterViewModel : ViewModel() {
         }
     }
 
+    fun deleteAllCharacter() {
+        viewModelScope.launch(Dispatchers.IO) {
+
+             CharacterRepository.deleteAllCharacter()
+
+        }
+    }
+
     private suspend fun loadCharacters() {
         _characters.value = CharacterRepository.getCharacters()
     }

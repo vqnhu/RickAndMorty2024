@@ -15,6 +15,7 @@ abstract class RickAndMortyDatabase : RoomDatabase() {
 
     private val characters = mutableListOf<CreateCharacter>()
 
+
     // henter karaterene
     fun getCharacters(): List<CreateCharacter> {
         return characters

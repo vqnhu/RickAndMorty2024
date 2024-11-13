@@ -52,4 +52,13 @@ object CharacterRepository {
         }
     }
 
+    suspend fun deleteAllCharacter(): Int {
+        try {
+            return _rickAndMortyDao.deleteAllCharacters()
+        } catch (e: SQLException) {
+            Log.e("somthing went wrong", e.toString())
+            return 0
+        }
+    }
+
 }

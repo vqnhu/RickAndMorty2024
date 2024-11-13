@@ -13,6 +13,9 @@ interface RickAndMortyDao {
     @Query("SELECT * FROM CreateCharacter")
     suspend fun getCharacters(): List<CreateCharacter>
 
+    @Query("DELETE FROM CreateCharacter")
+    suspend fun deleteAllCharacters(): Int
+
     // lage karakter
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insterCharacter(character: CreateCharacter): Long
@@ -20,4 +23,7 @@ interface RickAndMortyDao {
     // spørringsmetode for å slette karakter
     @Delete
     suspend fun deleteCharacter(character: CreateCharacter): Int
+
+
+
 }
