@@ -179,7 +179,7 @@ fun AppNavigation(
                 startDestination = Home
             )
             {
-                composable<Home> {
+               composable<Home> {
                     HomeScreen(HomeViewModel())
                 }
                 composable<ShowCharacter> {

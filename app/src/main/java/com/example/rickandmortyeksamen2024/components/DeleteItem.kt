@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import com.example.rickandmortyeksamen2024.data.CreateCharacter
 
 @Composable
-fun DeleteCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)? = null, deleteAllCharacters : (() -> Unit)? = null) {
+fun DeleteCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)? = null) {
     Column {
         Row (verticalAlignment = Alignment.CenterVertically) {
             Text(deleteCharacter.name)
@@ -30,10 +30,5 @@ fun DeleteCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)
 
         }
     }
-    Button(onClick = {
-       deleteAllCharacters?.invoke()
-    }) {
-        Icon(imageVector = Icons.Outlined.Delete, contentDescription = null)
-        Text("slett alle karakterene")
-    }
+
 }

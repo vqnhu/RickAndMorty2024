@@ -3,6 +3,9 @@ package com.example.rickandmortyeksamen2024.screens.yourcharacter
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -51,15 +54,20 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                 DeleteCharacterItem(
                     character,
                     onDelete = {
-                        characterToDelete = character
-                        showDeleteDialog = true
+                        yourCharacterViewModel.deleteCharacter(character)
                     },
-                    deleteAllCharacters = {
-                        deleteAllCharacters = true
-                        showDeleteDialog = true
-                    }
                 )
+
+
+
             }
+        }
+
+        Button(onClick = {
+            yourCharacterViewModel.deleteAllCharacter()
+        }) {
+            Icon(imageVector = Icons.Filled.Delete, contentDescription = null)
+            Text("slett alle karakterene")
         }
 
         // bekreft sletting av karakter

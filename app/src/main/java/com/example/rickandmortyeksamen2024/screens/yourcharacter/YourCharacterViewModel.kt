@@ -32,10 +32,10 @@ class YourCharacterViewModel : ViewModel() {
     fun deleteCharacter(character: CreateCharacter) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            val numberDeleted = CharacterRepository.deleteCharacter(character)
+            val numberDeleted = CharacterRepository.deleteCharacter(character) // slette fra databasen
             if (numberDeleted == 1) {
-                val currentList = _characters.value
-                val afterDeleteList = currentList.filter { it != character }
+                val currentList = _characters.value // den linjen her sletter fra databasen, men oppdaterer ikke grensensnittet
+                val afterDeleteList = currentList.filter { it != character } // sletter en karakter fra grensesnittet
                 _characters.value = afterDeleteList
             }
         }
@@ -44,8 +44,10 @@ class YourCharacterViewModel : ViewModel() {
     fun deleteAllCharacter() {
         viewModelScope.launch(Dispatchers.IO) {
 
-             CharacterRepository.deleteAllCharacter()
-
+            val numberDeleted = CharacterRepository.deleteAllCharacter() // slette alle karakterene fra databasen
+            if (numberDeleted > 0) {
+                _characters.value = emptyList() // fjerner alle karakterene fra grensesnittet
+            }
         }
     }
 
