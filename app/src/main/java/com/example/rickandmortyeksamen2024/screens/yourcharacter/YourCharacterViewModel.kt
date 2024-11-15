@@ -17,10 +17,16 @@ class YourCharacterViewModel : ViewModel() {
     // val characters: StateFlow<List<CreateCharacter>> get() = _characters
     val characters = _characters.asStateFlow()
 
+    // oppdaterer karakterene fra grensesnitt
     init {
         viewModelScope.launch {
             loadCharacters()
         }
+    }
+
+    // henter karakterene fra databasen
+    private suspend fun loadCharacters() {
+        _characters.value = CharacterRepository.getCharacters()
     }
 
     fun setCharacters() {
@@ -44,15 +50,12 @@ class YourCharacterViewModel : ViewModel() {
     fun deleteAllCharacter() {
         viewModelScope.launch(Dispatchers.IO) {
 
-            val numberDeleted = CharacterRepository.deleteAllCharacter() // slette alle karakterene fra databasen
+            val numberDeleted =
+                CharacterRepository.deleteAllCharacter() // slette alle karakterene fra databasen
             if (numberDeleted > 0) {
                 _characters.value = emptyList() // fjerner alle karakterene fra grensesnittet
             }
         }
-    }
-
-    private suspend fun loadCharacters() {
-        _characters.value = CharacterRepository.getCharacters()
     }
 
 

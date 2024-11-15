@@ -55,7 +55,7 @@ fun ShowCharacterScreen(showCharacterViewModel: ShowCharacterViewModel) {
 
     // 3. jobbe med grensesnitt
     Column {
-        Text(text = "Rick and Morty karakterer", fontSize = 24.sp)
+        Text(text = "Rick and Morty karakterer", fontSize = 34.sp, color = Color(2, 94, 80, 255))
 
         // Bruker LazyColumn for å liste karakterene
         LazyColumn {

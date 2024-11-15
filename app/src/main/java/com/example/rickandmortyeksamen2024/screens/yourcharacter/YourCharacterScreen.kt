@@ -15,7 +15,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.rickandmortyeksamen2024.components.CharacterItem
 import com.example.rickandmortyeksamen2024.components.DeleteCharacterItem
@@ -43,7 +45,7 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
     }
 
     Column {
-        Text(text = "Slett Karakter")
+        Text(text = "Dine Rick and Morty karakterer")
 
         if (message == true) {
             Text("henter karakterene fra databasen")
@@ -54,21 +56,28 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                 DeleteCharacterItem(
                     character,
                     onDelete = {
-                        yourCharacterViewModel.deleteCharacter(character)
+                        characterToDelete = character
+                        showDeleteDialog = true
                     },
                 )
+            }
+        }
 
-
+        Box(modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            Button(onClick = {
+                deleteAllCharacters = true
+                showDeleteDialog = true
+            },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(207, 33, 16, 255))
+                ) {
+                Icon(imageVector = Icons.Filled.Delete, contentDescription = null)
+                Text("Slett alle karakterene", color = Color.White)
 
             }
         }
 
-        Button(onClick = {
-            yourCharacterViewModel.deleteAllCharacter()
-        }) {
-            Icon(imageVector = Icons.Filled.Delete, contentDescription = null)
-            Text("slett alle karakterene")
-        }
 
         // bekreft sletting av karakter
         if (showDeleteDialog && characterToDelete != null) {
@@ -100,7 +109,6 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
             )
         }
 
-        //////////****************
 
         // bekreft sletting av ALLE karakter
         if (showDeleteDialog && deleteAllCharacters != null) {
