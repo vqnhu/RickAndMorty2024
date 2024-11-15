@@ -35,23 +35,15 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
 
     val characters = makeNewCharacterViewModel.characters.collectAsState()
 
-    var name by remember {
-        mutableStateOf("")
-    }
-    var species by remember {
-        mutableStateOf("")
-    }
-    var status by remember {
-        mutableStateOf("")
-    }
-    var image by remember {
-        mutableStateOf("")
-    }
+    var name by remember { mutableStateOf("") }
+    var species by remember { mutableStateOf("") }
+    var status by remember { mutableStateOf("") }
+    var image by remember { mutableStateOf("") }
+    var imageUri by remember { mutableStateOf<String?>(null) }
 
-    // Meldingen til brukeren og karakterene er lagret
-    var message by remember {
-        mutableStateOf(false)
-    }
+
+    // Meldingen til brukeren om at karakteren er lagret
+    var message by remember { mutableStateOf(false) }
 
     Column {
         Text(text = "Lag din Rick and Morty karakter her: ")
@@ -75,21 +67,31 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 selected = (status == "Dead"),
                 onClick = { status = "Dead" })
             Text(text = "Dead")
-            
+
         }
-        TextField(
-            value = image,
-            onValueChange = { image = it },
-            label = { Text(text = "Bilde") }
-        )
+
+        // Button to open gallery
+        Button(onClick = { makeNewCharacterViewModel.openGallery?.let { it() } }) {
+            Text(text = "Bilde")
+        }
+
 
         Button(onClick = {
-            val newCharacter = CreateCharacter(name = name, species = species, status = status, image = image)
+            val newCharacter =
+                CreateCharacter(
+                    name = name,
+                    species = species,
+                    status = status,
+                    image = imageUri ?: "Default"
+                )
             makeNewCharacterViewModel.insertCharachter(newCharacter)
             name = ""
+            species = ""
+            status = ""
+            imageUri = null
             message = true
         })
-        
+
         {
             Text(text = "Lagre karakter i databasen")
         }

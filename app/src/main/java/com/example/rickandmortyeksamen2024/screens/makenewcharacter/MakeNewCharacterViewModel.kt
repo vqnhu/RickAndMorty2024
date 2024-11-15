@@ -11,6 +11,18 @@ import kotlinx.coroutines.launch
 
 class MakeNewCharacterViewModel : ViewModel() {
 
+    // Image URI for the selected image from gallery
+    private val _imageUri = MutableStateFlow<String?>(null)
+    val imageUri = _imageUri.asStateFlow()
+
+    // Lambda to open gallery from MainActivity
+    var openGallery: (() -> Unit)? = null
+
+    // Update image URI
+    fun setImageUri(uri: String) {
+        _imageUri.value = uri
+    }
+
     private val _characters = MutableStateFlow<List<CreateCharacter>>(emptyList())
 
     val characters = _characters.asStateFlow()

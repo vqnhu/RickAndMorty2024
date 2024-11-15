@@ -18,6 +18,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.rickandmortyeksamen2024.components.CharacterItem
 import com.example.rickandmortyeksamen2024.components.DeleteCharacterItem
@@ -34,6 +36,7 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
     var showDeleteAllDialog by remember { mutableStateOf(false) }
     var characterToDelete by remember { mutableStateOf<CreateCharacter?>(null) }
     var deleteAllCharacters by remember { mutableStateOf(false) }
+
 
 
     Column {
