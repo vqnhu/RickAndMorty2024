@@ -31,6 +31,7 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
 
     val character = yourCharacterViewModel.characters.collectAsState()
     var showDeleteDialog by remember { mutableStateOf(false) }
+    var showDeleteAllDialog by remember { mutableStateOf(false) }
     var characterToDelete by remember { mutableStateOf<CreateCharacter?>(null) }
     var deleteAllCharacters by remember { mutableStateOf(false) }
 
@@ -63,15 +64,16 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
             }
         }
 
-        Box(modifier = Modifier.fillMaxSize(),
+        Box(
+            modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.BottomCenter
         ) {
-            Button(onClick = {
-                deleteAllCharacters = true
-                showDeleteDialog = true
-            },
+            Button(
+                onClick = {
+                    showDeleteAllDialog = true
+                },
                 colors = ButtonDefaults.buttonColors(containerColor = Color(207, 33, 16, 255))
-                ) {
+            ) {
                 Icon(imageVector = Icons.Filled.Delete, contentDescription = null)
                 Text("Slett alle karakterene", color = Color.White)
 
@@ -111,17 +113,16 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
 
 
         // bekreft sletting av ALLE karakter
-        if (showDeleteDialog && deleteAllCharacters != null) {
+        if (showDeleteAllDialog) {
             AlertDialog(
-                onDismissRequest = { showDeleteDialog = false },
+                onDismissRequest = { deleteAllCharacters = false },
                 title = { Text(text = "Bekreft sletting") },
                 text = { Text("Er du sikker på at du vil slette ALLE karakterene?") },
                 confirmButton = {
                     TextButton(
                         onClick = {
-                            deleteAllCharacters?.let { yourCharacterViewModel.deleteAllCharacter() }
-                            showDeleteDialog = false
-                            deleteAllCharacters = false
+                            yourCharacterViewModel.deleteAllCharacter()
+                            showDeleteAllDialog = false
                         }
                     ) {
                         Text("Ja")
@@ -130,8 +131,7 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                 dismissButton = {
                     TextButton(
                         onClick = {
-                            showDeleteDialog = false
-                            deleteAllCharacters = false
+                            showDeleteAllDialog = false
                         }
                     ) {
                         Text("Nei")
