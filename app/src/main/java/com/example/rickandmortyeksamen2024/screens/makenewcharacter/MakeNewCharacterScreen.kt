@@ -46,6 +46,16 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
     // Meldingen til brukeren om at karakteren er lagret
     var message by remember { mutableStateOf(false) }
 
+    val images = listOf(
+        R.drawable.calypso,
+        R.drawable.noob,
+        R.drawable.diane,
+        R.drawable.dimension,
+        R.drawable.lady_katana,
+        R.drawable.mr_frundles,
+        R.drawable.poopy_butthole,
+    )
+
     Column {
         Text(text = "Lag din Rick and Morty karakter her: ")
 
@@ -73,13 +83,15 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
 
         // velg bilde
         Text("Velg en bilde for karakteren")
-        Image(
-            painter = painterResource(id = R.drawable.calypso),
-            contentDescription = "Character Image",
-            modifier = Modifier
-                .size(200.dp)
-                .padding(8.dp)
-        )
+        images.forEach {
+            image->
+            Image(
+                painter = painterResource(id = image),
+                contentDescription = "",
+                modifier = Modifier
+                    .size(150.dp)
+                    .padding(4.dp))
+        }
 
         Button(onClick = {
             val newCharacter =
