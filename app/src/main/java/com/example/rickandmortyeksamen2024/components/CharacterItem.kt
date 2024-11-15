@@ -2,9 +2,12 @@ package com.example.rickandmortyeksamen2024.components
 
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,30 +29,52 @@ import com.example.rickandmortyeksamen2024.data.Character
 
 @Composable
 fun CharacterItem(character: Character) {
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .background(Color(0, 139, 119)) // Bakgrunnsfarge for boksen
+            .padding(16.dp)
+            .background(
+                Color(0, 139, 119),
+                shape = RoundedCornerShape(16.dp)
+            ) // Bakgrunnsfarge for boksen
+            .border(4.dp, Color(195, 214, 0), RoundedCornerShape(16.dp))
             .padding(16.dp), // Innvendig padding for boksen
-        //verticalAlignment = Alignment.CenterVertically
+
     ) {
-        // Bilde til venstre
-        AsyncImage( // Async laste bilder asynkront, spesielt fra nettverkskilder. Den håndterer innlasting, caching og feil automatisk.
-            model = character.image,
-            contentDescription = "Image of ${character.name}",
-            modifier = Modifier
-                .size(84.dp) // Størrelse på bildet
-                .clip(RoundedCornerShape(12.dp)) // Gjør bildet firkantet med avrundede hjørner
-        )
+        // inne i kortet er det et Column for å ordne innholdet vertikalt
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+            ) {
+            // Bilde til venstre
+            AsyncImage( // Async laste bilder asynkront, spesielt fra nettverkskilder. Den håndterer innlasting, caching og feil automatisk.
+                model = character.image,
+                contentDescription = "Image of ${character.name}",
+                modifier = Modifier
+                    .size(100.dp) // Størrelse på bildet
+                    .clip(RoundedCornerShape(50.dp)) // Gjør bildet firkantet med avrundede hjørner
+                    .border(4.dp, Color(195, 214, 0), RoundedCornerShape(16.dp))
+            )
 
-        Spacer(modifier = Modifier.width(16.dp)) // Plass mellom bildet og teksten
+            Spacer(modifier = Modifier.width(8.dp)) // Plass mellom bildet og teksten
 
-        // Informasjon om karakteren til høyre
-        Column {
-            Text(text = character.name, fontSize = 20.sp, color = Color.White)
-            Text(text = character.species, fontSize = 16.sp, color = Color.White) // Eksempel på ekstra info
+            // Informasjon om karakteren til høyre
+
+                Text(
+                    text = character.name,
+                    fontSize = 20.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = character.species,
+                    fontSize = 16.sp,
+                    color = Color.White,
+                    textAlign = TextAlign.Center
+                )
+
         }
+
     }
     /*Column {
         Text(text = character.name)
@@ -62,7 +88,7 @@ fun CharacterItem(character: Character) {
      */
 }
 
-@Composable
+/* @Composable
 @Preview(showSystemUi = true, showBackground = true)
 fun showChar() {
     // Opprett en dummy Character-instans
@@ -75,3 +101,4 @@ fun showChar() {
     // Kall CharacterItem med dummy-instansen
     CharacterItem(character)
 }
+*/
