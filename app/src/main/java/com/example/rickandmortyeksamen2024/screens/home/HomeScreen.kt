@@ -25,7 +25,7 @@ import com.example.rickandmortyeksamen2024.navigation.AppNavigation
 @Composable
 fun HomeScreen(homeViewModel: HomeViewModel) {
 
-     val viewModel: HomeViewModel = viewModel()
+    val viewModel: HomeViewModel = viewModel()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -39,25 +39,22 @@ fun HomeScreen(homeViewModel: HomeViewModel) {
             style = TextStyle(
                 fontSize = 55.sp,
                 textAlign = TextAlign.Center,
-                color = Color(0,139,119)
+                color = Color(0, 139, 119)
 
             ),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(top = 90.dp)
-
-
-
         )
         Button(
             onClick = {
-            // TODO:
-        },
-          colors = ButtonDefaults.buttonColors(
-              containerColor = Color(0, 139, 119), // bakgrunnsfarge
-              contentColor = Color.Yellow
+                // TODO:
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0, 139, 119), // bakgrunnsfarge
+                contentColor = Color.Yellow
 
-          ),
+            ),
             modifier = Modifier
                 .padding(top = 260.dp)
                 .padding(horizontal = 160.dp)
@@ -68,5 +65,5 @@ fun HomeScreen(homeViewModel: HomeViewModel) {
         }
 
     }
- }
+}
 

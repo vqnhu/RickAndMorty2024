@@ -3,6 +3,7 @@ package com.example.rickandmortyeksamen2024.screens.makenewcharacter
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,7 +41,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
     var name by remember { mutableStateOf("") }
     var species by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("") }
-    val image by remember { mutableStateOf("") }
+    var image by remember { mutableStateOf("") }
 
     // Meldingen til brukeren om at karakteren er lagret
     var message by remember { mutableStateOf(false) }
@@ -70,6 +71,15 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
 
         }
 
+        // velg bilde
+        Text("Velg en bilde for karakteren")
+        Image(
+            painter = painterResource(id = R.drawable.calypso),
+            contentDescription = "Character Image",
+            modifier = Modifier
+                .size(200.dp)
+                .padding(8.dp)
+        )
 
         Button(onClick = {
             val newCharacter =
@@ -77,7 +87,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                     name = name,
                     species = species,
                     status = status,
-                    image = ""
+                    image = image
                 )
             makeNewCharacterViewModel.insertCharachter(newCharacter)
             name = ""
