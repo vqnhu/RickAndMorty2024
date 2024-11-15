@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -24,13 +25,13 @@ import com.example.rickandmortyeksamen2024.data.Character
 
 @Composable
 fun CharacterItem(character: Character) {
-    Row(
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .background(Color(0, 139, 119)) // Bakgrunnsfarge for boksen
             .padding(16.dp), // Innvendig padding for boksen
-        verticalAlignment = Alignment.CenterVertically
+        //verticalAlignment = Alignment.CenterVertically
     ) {
         // Bilde til venstre
         AsyncImage( // Async laste bilder asynkront, spesielt fra nettverkskilder. Den håndterer innlasting, caching og feil automatisk.
@@ -59,4 +60,18 @@ fun CharacterItem(character: Character) {
     }
 
      */
+}
+
+@Composable
+@Preview(showSystemUi = true, showBackground = true)
+fun showChar() {
+    // Opprett en dummy Character-instans
+    val character = Character(
+        name = "Rick Sanchez",
+        species = "Human",
+        image = "picture"
+    )
+
+    // Kall CharacterItem med dummy-instansen
+    CharacterItem(character)
 }

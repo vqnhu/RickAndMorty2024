@@ -36,21 +36,8 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
     var deleteAllCharacters by remember { mutableStateOf(false) }
 
 
-    var message by remember { mutableStateOf(false) }
-
-    LaunchedEffect(Unit) {
-        message = true
-        delay(3000L)
-        yourCharacterViewModel.setCharacters()
-        message = false
-    }
-
     Column {
         Text(text = "Dine Rick and Morty karakterer")
-
-        if (message == true) {
-            Text("henter karakterene fra databasen")
-        }
 
         LazyColumn {
             items(character.value) { character ->
