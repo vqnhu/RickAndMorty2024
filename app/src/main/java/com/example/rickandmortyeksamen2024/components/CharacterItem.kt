@@ -37,7 +37,7 @@ fun CharacterItem(character: Character) {
                 Color(0, 139, 119),
                 shape = RoundedCornerShape(16.dp)
             ) // Bakgrunnsfarge for boksen
-            .border(4.dp, Color(195, 214, 0), RoundedCornerShape(16.dp))
+            .border(4.dp, Color(195, 214, 0), RoundedCornerShape(16.dp)) // lager en border rundt kortet og styler den gul
             .padding(16.dp), // Innvendig padding for boksen
 
     ) {
@@ -51,9 +51,9 @@ fun CharacterItem(character: Character) {
                 model = character.image,
                 contentDescription = "Image of ${character.name}",
                 modifier = Modifier
-                    .size(100.dp) // Størrelse på bildet
-                    .clip(RoundedCornerShape(50.dp)) // Gjør bildet firkantet med avrundede hjørner
-                    .border(4.dp, Color(195, 214, 0), RoundedCornerShape(16.dp))
+                    .size(130.dp) // Størrelse på bildet
+                    .clip(RoundedCornerShape(50.dp)) // "klipper" bildet og gjør bildet rund
+
             )
 
             Spacer(modifier = Modifier.width(8.dp)) // Plass mellom bildet og teksten
@@ -62,8 +62,8 @@ fun CharacterItem(character: Character) {
 
                 Text(
                     text = character.name,
-                    fontSize = 20.sp,
-                    color = Color.White,
+                    fontSize = 24.sp,
+                    color = Color(195, 214, 0),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -72,6 +72,12 @@ fun CharacterItem(character: Character) {
                     color = Color.White,
                     textAlign = TextAlign.Center
                 )
+            Text(
+                text = character.status,
+                fontSize = 16.sp,
+                color = Color.White,
+                textAlign = TextAlign.Center
+            )
 
         }
 
@@ -88,17 +94,3 @@ fun CharacterItem(character: Character) {
      */
 }
 
-/* @Composable
-@Preview(showSystemUi = true, showBackground = true)
-fun showChar() {
-    // Opprett en dummy Character-instans
-    val character = Character(
-        name = "Rick Sanchez",
-        species = "Human",
-        image = "picture"
-    )
-
-    // Kall CharacterItem med dummy-instansen
-    CharacterItem(character)
-}
-*/

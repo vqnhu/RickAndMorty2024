@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -26,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.rickandmortyeksamen2024.R
 import com.example.rickandmortyeksamen2024.data.CreateCharacter
 import kotlinx.coroutines.delay
@@ -38,9 +40,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
     var name by remember { mutableStateOf("") }
     var species by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("") }
-    var image by remember { mutableStateOf("") }
-    var imageUri by remember { mutableStateOf<String?>(null) }
-
+    val image by remember { mutableStateOf("") }
 
     // Meldingen til brukeren om at karakteren er lagret
     var message by remember { mutableStateOf(false) }
@@ -70,11 +70,6 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
 
         }
 
-        // Button to open gallery
-        Button(onClick = { makeNewCharacterViewModel.openGallery?.let { it() } }) {
-            Text(text = "Bilde")
-        }
-
 
         Button(onClick = {
             val newCharacter =
@@ -82,13 +77,12 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                     name = name,
                     species = species,
                     status = status,
-                    image = imageUri ?: "Default"
+                    image = ""
                 )
             makeNewCharacterViewModel.insertCharachter(newCharacter)
             name = ""
             species = ""
             status = ""
-            imageUri = null
             message = true
         })
 
