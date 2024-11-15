@@ -53,11 +53,13 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
     val images = listOf(
         R.drawable.calypso,
         R.drawable.noob,
-        R.drawable.diane,
+       /* R.drawable.diane,
         R.drawable.dimension,
         R.drawable.lady_katana,
         R.drawable.mr_frundles,
         R.drawable.poopy_butthole,
+
+        */
     )
 
     var selectedImages by remember { mutableStateOf(setOf<Int>()) }
@@ -132,7 +134,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                     name = name,
                     species = species,
                     status = status,
-                    image = image
+                    image = selectedImages.toString()
                 )
             makeNewCharacterViewModel.insertCharachter(newCharacter)
             name = ""
