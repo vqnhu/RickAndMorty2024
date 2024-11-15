@@ -5,8 +5,11 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -56,6 +60,8 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
         R.drawable.poopy_butthole,
     )
 
+    var selectedImages by remember { mutableStateOf(setOf<Int>()) }
+
     Column {
         Text(text = "Lag din Rick and Morty karakter her: ")
 
@@ -81,17 +87,44 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
 
         }
 
-        // velg bilde
-        Text("Velg en bilde for karakteren")
-        images.forEach {
-            image->
-            Image(
-                painter = painterResource(id = image),
-                contentDescription = "",
+
+        images.forEach { image ->
+            val isSelected = selectedImages.contains(image)
+            Box(
                 modifier = Modifier
-                    .size(150.dp)
-                    .padding(4.dp))
+                    .size(200.dp)
+                    .padding(8.dp)
+                    .clickable {
+                        // Toggle the image selection
+                        selectedImages = if (isSelected) {
+                            selectedImages - image
+                        } else {
+                            selectedImages + image
+                        }
+                    }
+            ) {
+                Image(
+                    painter = painterResource(id = image),
+                    contentDescription = "Character Image",
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .scale(if (isSelected) 0.8f else 1f) // Scale down when selected
+                )
+
+                // Show check mark if the image is selected
+                if (isSelected) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_check),
+                        contentDescription = "Selected",
+                        tint = Color.Green,
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .padding(8.dp)
+                    )
+                }
+            }
         }
+
 
         Button(onClick = {
             val newCharacter =
