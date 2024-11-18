@@ -60,5 +60,4 @@ object CharacterRepository {
             return 0
         }
     }
-
 }

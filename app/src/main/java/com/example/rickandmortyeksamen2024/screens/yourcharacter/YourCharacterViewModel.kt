@@ -6,7 +6,6 @@ import com.example.rickandmortyeksamen2024.data.CreateCharacter
 import com.example.rickandmortyeksamen2024.data.room.CharacterRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
@@ -29,11 +28,6 @@ class YourCharacterViewModel : ViewModel() {
         _characters.value = CharacterRepository.getCharacters()
     }
 
-    fun setCharacters() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _characters.value = CharacterRepository.getCharacters()
-        }
-    }
 
     fun deleteCharacter(character: CreateCharacter) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -57,6 +51,4 @@ class YourCharacterViewModel : ViewModel() {
             }
         }
     }
-
-
 }

@@ -1,8 +1,7 @@
-package com.example.rickandmortyeksamen2024.data
+package com.example.rickandmortyeksamen2024.data.services
 
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Path
 
 interface RickAndMortyService {
     @GET("character/?format=json")

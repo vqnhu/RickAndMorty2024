@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,12 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.rickandmortyeksamen2024.data.Character
-
 
 @Composable
 fun CharacterItem(character: Character) {
@@ -33,10 +30,7 @@ fun CharacterItem(character: Character) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .background(
-                Color(0, 139, 119),
-                shape = RoundedCornerShape(16.dp)
-            ) // Bakgrunnsfarge for boksen
+            .background(Color(0, 139, 119), shape = RoundedCornerShape(16.dp)) // Bakgrunnsfarge for boksen
             .border(4.dp, Color(195, 214, 0), RoundedCornerShape(16.dp)) // lager en border rundt kortet og styler den gul
             .padding(16.dp), // Innvendig padding for boksen
 
@@ -52,7 +46,7 @@ fun CharacterItem(character: Character) {
                 contentDescription = "Image of ${character.name}",
                 modifier = Modifier
                     .size(130.dp) // Størrelse på bildet
-                    .clip(RoundedCornerShape(50.dp)) // "klipper" bildet og gjør bildet rund
+                    .clip(RoundedCornerShape(24.dp)) // "klipper" bildet og gjør bildet rund
 
             )
 
@@ -78,19 +72,7 @@ fun CharacterItem(character: Character) {
                 color = Color.White,
                 textAlign = TextAlign.Center
             )
-
         }
-
     }
-    /*Column {
-        Text(text = character.name)
-        Text(text = character.species)
-        AsyncImage(
-            model = character.image,
-            contentDescription = "Image of ${character.name}"
-        )
-    }
-
-     */
 }
 

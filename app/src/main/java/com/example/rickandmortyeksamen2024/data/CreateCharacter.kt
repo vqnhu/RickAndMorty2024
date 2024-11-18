@@ -10,8 +10,5 @@ data class CreateCharacter(
     val name: String,
     val species: String,
     val status: String,
-    val image: String
+    val image: Int
 )
-
-
-// NYYYY

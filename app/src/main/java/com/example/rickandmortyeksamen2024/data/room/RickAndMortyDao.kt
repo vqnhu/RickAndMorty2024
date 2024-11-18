@@ -23,7 +23,4 @@ interface RickAndMortyDao {
     // spørringsmetode for å slette karakter
     @Delete
     suspend fun deleteCharacter(character: CreateCharacter): Int
-
-
-
 }

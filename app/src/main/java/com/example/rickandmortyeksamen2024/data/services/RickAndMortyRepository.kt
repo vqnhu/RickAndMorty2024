@@ -1,5 +1,6 @@
-package com.example.rickandmortyeksamen2024.data
+package com.example.rickandmortyeksamen2024.data.services
 
+import com.example.rickandmortyeksamen2024.data.Character
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

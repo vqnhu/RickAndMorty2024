@@ -16,4 +16,5 @@ class HomeViewModel : ViewModel() {
     fun updateTitle(newTitle: String) {
         title = newTitle
     }
+
 }

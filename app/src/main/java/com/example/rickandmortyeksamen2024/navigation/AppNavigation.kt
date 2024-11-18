@@ -4,12 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
@@ -24,7 +21,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -197,19 +193,4 @@ fun AppNavigation(
             }
         }
     }
-}
-
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun Navigation() {
-    val homeViewModel = HomeViewModel()
-    val makeNewCharacterViewModel = MakeNewCharacterViewModel()
-    val showCharacterViewModel = ShowCharacterViewModel()
-    val yourCharacterViewModel = YourCharacterViewModel()
-    AppNavigation(
-        homeViewModel = homeViewModel,
-        makeNewCharacterViewModel = makeNewCharacterViewModel,
-        showCharacterViewModel = showCharacterViewModel,
-        yourCharacterViewModel = yourCharacterViewModel
-    )
 }
