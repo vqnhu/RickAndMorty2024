@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Build
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.outlined.Build
 import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
@@ -21,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -60,7 +63,10 @@ fun AppNavigation(
 
     Scaffold(modifier = Modifier.fillMaxSize(),
         bottomBar = {
-            NavigationBar {
+            NavigationBar(
+                containerColor = Color(0, 150, 136, 255),
+                contentColor = Color.White
+            ) {
                 // navigasjonsskjerm viser forside
                 NavigationBarItem(
                     selected = chosenScreen == 0,
@@ -82,7 +88,7 @@ fun AppNavigation(
                         }
                     },
                     label = {
-                        Text(text = "Home")
+                        Text(text = "Hjem")
                     }
                 )
 
@@ -96,18 +102,18 @@ fun AppNavigation(
                     icon = {
                         if (chosenScreen == 1) {
                             Icon(
-                                imageVector = Icons.Filled.Home,
+                                imageVector = Icons.Filled.Face,
                                 contentDescription = null
                             )
                         } else {
                             Icon(
-                                imageVector = Icons.Outlined.Home,
+                                imageVector = Icons.Outlined.Face,
                                 contentDescription = null
                             )
                         }
                     },
                     label = {
-                        Text(text = "All Characters")
+                        Text(text = "Alle karakterer")
                     }
                 )
 
@@ -133,7 +139,7 @@ fun AppNavigation(
 
                     },
                     label = {
-                        Text(text = "Make Character")
+                        Text(text = "Nye karakterer")
                     }
                 )
 
@@ -147,18 +153,18 @@ fun AppNavigation(
                     icon = {
                         if (chosenScreen == 3) {
                             Icon(
-                                imageVector = Icons.Filled.Face,
+                                imageVector = Icons.Filled.Build,
                                 contentDescription = null
                             )
                         } else {
                             Icon(
-                                imageVector = Icons.Outlined.Face,
+                                imageVector = Icons.Outlined.Build,
                                 contentDescription = null
                             )
                         }
                     },
                     label = {
-                        Text(text = "Your Character")
+                        Text(text = "Dine karakterer")
                     }
                 )
             }
@@ -189,7 +195,6 @@ fun AppNavigation(
                 composable<YourCharacter> {
                     YourCharacterScreen(YourCharacterViewModel())
                 }
-
             }
         }
     }

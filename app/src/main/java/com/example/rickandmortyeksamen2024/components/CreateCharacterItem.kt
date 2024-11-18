@@ -48,9 +48,9 @@ fun CreateCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)
                 .padding(start = 12.dp)
                 .weight(1f) // Take up remaining space in the row
         ) {
-            Text("Navn: ${deleteCharacter.name}", style = MaterialTheme.typography.headlineMedium, color = Color.White)
-            Text("Type: ${deleteCharacter.species}", style = MaterialTheme.typography.bodyMedium, color = Color(0xFFBDC3C7))
-            Text("Status: ${deleteCharacter.status}", style = MaterialTheme.typography.bodyMedium, color = Color(0xFFBDC3C7))
+            Text("Navn: ${deleteCharacter.name}", style = MaterialTheme.typography.headlineSmall, color = Color(195, 214, 0),)
+            Text("Type: ${deleteCharacter.species}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
+            Text("Status: ${deleteCharacter.status}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
         }
 
 

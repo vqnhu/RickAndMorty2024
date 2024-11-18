@@ -1,5 +1,6 @@
 package com.example.rickandmortyeksamen2024.screens.yourcharacter
 
+import DeleteCharacterDialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rickandmortyeksamen2024.components.CreateCharacterItem
 import com.example.rickandmortyeksamen2024.data.CreateCharacter
+import com.example.rickandmortyeksamen2024.deleteallcharactersdialog.DeleteAllCharactersDialog
 
 @Composable
 fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
@@ -90,65 +92,33 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                 }
             }
 
-
-            // bekreft sletting av karakter
-            if (showDeleteDialog && characterToDelete != null) {
-                AlertDialog(
-                    onDismissRequest = { showDeleteDialog = false },
-                    title = { Text(text = "Bekreft sletting") },
-                    text = { Text("Er du sikker på at du vil slette ${characterToDelete?.name}?") },
-                    confirmButton = {
-                        TextButton(
-                            onClick = {
-                                characterToDelete?.let { yourCharacterViewModel.deleteCharacter(it) }
-                                showDeleteDialog = false
-                                characterToDelete = null
-                            }
-                        ) {
-                            Text("Ja")
-                        }
+            // dialog for å slette en karakter
+            if (showDeleteDialog) {
+                DeleteCharacterDialog(
+                    characterToDelete = characterToDelete,
+                    onConfirm = {
+                        characterToDelete?.let { yourCharacterViewModel.deleteCharacter(it) }
+                        showDeleteDialog = false
+                        characterToDelete = null
                     },
-                    dismissButton = {
-                        TextButton(
-                            onClick = {
-                                showDeleteDialog = false
-                                characterToDelete = null
-                            }
-                        ) {
-                            Text("Nei")
-                        }
+                    onDismiss = {
+                        showDeleteDialog = false
+                        characterToDelete = null
                     }
                 )
             }
 
-
-            // bekreft sletting av ALLE karakter
+            // dialog for å slette alle karakterene
             if (showDeleteAllDialog) {
-                AlertDialog(
-                    onDismissRequest = { deleteAllCharacters = false },
-                    title = { Text(text = "Bekreft sletting") },
-                    text = { Text("Er du sikker på at du vil slette ALLE karakterene?") },
-                    confirmButton = {
-                        TextButton(
-                            onClick = {
-                                yourCharacterViewModel.deleteAllCharacter()
-                                showDeleteAllDialog = false
-                            }
-                        ) {
-                            Text("Ja")
-                        }
+                DeleteAllCharactersDialog(
+                    onConfirm = {
+                        yourCharacterViewModel.deleteAllCharacter()
+                        showDeleteAllDialog = false
                     },
-                    dismissButton = {
-                        TextButton(
-                            onClick = {
-                                showDeleteAllDialog = false
-                            }
-                        ) {
-                            Text("Nei")
-                        }
-                    }
+                    onDismiss = { showDeleteAllDialog = false }
                 )
             }
+
         }
     }
 }

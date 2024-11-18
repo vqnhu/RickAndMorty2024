@@ -39,6 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.rickandmortyeksamen2024.R
 import com.example.rickandmortyeksamen2024.data.CreateCharacter
 import kotlinx.coroutines.delay
@@ -88,12 +89,13 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 .fillMaxSize()
                 .verticalScroll(scrollState)
                 .background(Color(31, 31, 34, 255))
+                .padding(8.dp)
         ) {
             Text(
-                text = "Lag dine karakterer her: ",
-                color = Color.White
-                // skal style mer!!!!!
-
+                text = "Lag din egen karakter",
+                color = Color(195, 214, 0),
+                fontSize = 30.sp,
+                modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)
             )
 
             TextField(
@@ -105,7 +107,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 },
                 label = { Text("Navn") },
                 isError = nameError, // Behandler Error
-                modifier = Modifier.padding(8.dp)
+
             )
 
             if (nameError) {
@@ -125,7 +127,8 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 },
                 label = { Text(text = "Type") },
                 isError = speciesError,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(top = 8.dp)
+
             )
 
             if (speciesError) {
@@ -138,6 +141,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
             Text(
                 text = "Status: ",
                 color = Color.White,
+                modifier = Modifier.padding(top = 8.dp)
             )
 
             Row(
