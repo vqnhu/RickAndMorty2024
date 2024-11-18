@@ -53,6 +53,7 @@ fun CreateCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)
             Text("Status: ${deleteCharacter.status}", style = MaterialTheme.typography.bodyMedium, color = Color(0xFFBDC3C7))
         }
 
+
         // Delete Icon Button
         if (onDelete != null) {
             IconButton(
