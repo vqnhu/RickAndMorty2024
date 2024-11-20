@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.rickandmortyeksamen2024.screens.home.HomeScreen
 import com.example.rickandmortyeksamen2024.screens.home.HomeViewModel
@@ -61,21 +62,27 @@ fun AppNavigation(
         mutableStateOf(0)
     }
 
+    // Henter den nåværendedelen av skjermen
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+    // Henter inn hvilket skjetm som er valgt
+    val currentDestination = currentBackStackEntry?.destination?.route
+
     Scaffold(modifier = Modifier.fillMaxSize(),
         bottomBar = {
+            // Hvis nåværende skjerm ikke er hjem -> vis navigasjonsbaren
+            if (currentDestination != "home") {
             NavigationBar(
                 containerColor = Color(0, 150, 136, 255),
                 contentColor = Color.White
             ) {
-                // navigasjonsskjerm viser forside
+                // Skjerm -> Hjem
                 NavigationBarItem(
-                    selected = chosenScreen == 0,
+                    selected = currentDestination == "home",
                     onClick = {
-                        chosenScreen = 0
-                        navController.navigate(Home)
+                        navController.navigate("home")
                     },
                     icon = {
-                        if (chosenScreen == 0) {
+                        if (currentDestination == "home") {
                             Icon(
                                 imageVector = Icons.Filled.Home,
                                 contentDescription = null
@@ -92,12 +99,12 @@ fun AppNavigation(
                     }
                 )
 
-                // navigasjon skjerm - vise alle karakterene
+                // Skjerm - Vise alle karakterene
                 NavigationBarItem(
                     selected = chosenScreen == 1,
                     onClick = {
                         chosenScreen = 1
-                        navController.navigate(ShowCharacter)
+                        navController.navigate("show_character")
                     },
                     icon = {
                         if (chosenScreen == 1) {
@@ -117,12 +124,12 @@ fun AppNavigation(
                     }
                 )
 
-                // navigasjon skjerm - lage karakterer
+                // Skjerm - Lage karakter
                 NavigationBarItem(
                     selected = chosenScreen == 2,
                     onClick = {
                         chosenScreen = 2
-                        navController.navigate(MakeCharacter)
+                        navController.navigate("make_character")
                     },
                     icon = {
                         if (chosenScreen == 2) {
@@ -139,16 +146,16 @@ fun AppNavigation(
 
                     },
                     label = {
-                        Text(text = "Nye karakterer")
+                        Text(text = "Lage karakter")
                     }
                 )
 
-                // navigasjon skjerm - vise de nye lagrede karakterene
+                // Skjerm - Dine karakterer
                 NavigationBarItem(
                     selected = chosenScreen == 3,
                     onClick = {
                         chosenScreen = 3
-                        navController.navigate(YourCharacter)
+                        navController.navigate("your_character")
                     },
                     icon = {
                         if (chosenScreen == 3) {
@@ -168,6 +175,7 @@ fun AppNavigation(
                     }
                 )
             }
+            }
         }
     ) { innerPadding ->
         Column(
@@ -178,21 +186,21 @@ fun AppNavigation(
 
             NavHost(
                 navController = navController,
-                startDestination = Home
+                startDestination = "home"
             )
             {
-               composable<Home> {
-                    HomeScreen(HomeViewModel())
+               composable("home") {
+                    HomeScreen(navigateToScreen = { screen -> navController.navigate(screen) })
                 }
-                composable<ShowCharacter> {
+                composable("show_character") {
                     ShowCharacterScreen(ShowCharacterViewModel())
                 }
 
-                composable<MakeCharacter> {
+                composable("make_character") {
                     MakeNewCharacterScreen(MakeNewCharacterViewModel())
                 }
 
-                composable<YourCharacter> {
+                composable("your_character") {
                     YourCharacterScreen(YourCharacterViewModel())
                 }
             }

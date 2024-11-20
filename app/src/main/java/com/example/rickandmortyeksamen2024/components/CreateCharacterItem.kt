@@ -19,7 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.rickandmortyeksamen2024.data.CreateCharacter
+import com.example.rickandmortyeksamen2024.data.data_classes.CreateCharacter
 
 @Composable
 fun CreateCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)? = null) {
@@ -33,7 +33,7 @@ fun CreateCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween // Mellomrom mellom bilde, tekst og knapp
     ) {
-        // Character Image
+        // Bilde av karakten
         Image(
             painter = painterResource(id = deleteCharacter.image),
             contentDescription = "${deleteCharacter.name} Image",
@@ -42,7 +42,7 @@ fun CreateCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)
                 .clip(RoundedCornerShape(24.dp)) // "klipper" bildet og gjør den rund
         )
 
-        // Character details
+        // Informasjons boks
         Column(
             modifier = Modifier
                 .padding(start = 12.dp)
@@ -54,7 +54,7 @@ fun CreateCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)
         }
 
 
-        // Delete Icon Button
+        // Knapp for å slette karakter
         if (onDelete != null) {
             IconButton(
                 onClick = onDelete,

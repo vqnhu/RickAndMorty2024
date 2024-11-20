@@ -1,4 +1,4 @@
-package com.example.rickandmortyeksamen2024.data
+package com.example.rickandmortyeksamen2024.data.data_classes
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

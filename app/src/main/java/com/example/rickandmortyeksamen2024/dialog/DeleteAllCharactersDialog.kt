@@ -1,4 +1,4 @@
-package com.example.rickandmortyeksamen2024.deleteallcharactersdialog
+package com.example.rickandmortyeksamen2024.dialog
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -10,8 +10,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun DeleteAllCharactersDialog(
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit
+    onConfirm: () -> Unit, // Lambda funskjon for bekreftelse
+    onDismiss: () -> Unit // Lambda funskjon for å avvise dialogen
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,
@@ -27,14 +27,15 @@ fun DeleteAllCharactersDialog(
                 style = MaterialTheme.typography.bodyMedium
             )
         },
+
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text("Ja", color = Color(0,0,0)) // Green for confirmation
+                Text("Ja", color = Color(0,0,0))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Nei", color = Color(0,0,0,)) // Neutral for cancel
+                Text("Nei", color = Color(0,0,0,))
             }
         },
         modifier = Modifier.padding(16.dp),

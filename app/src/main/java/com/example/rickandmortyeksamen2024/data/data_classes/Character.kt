@@ -1,4 +1,4 @@
-package com.example.rickandmortyeksamen2024.data
+package com.example.rickandmortyeksamen2024.data.data_classes
 
 data class Character(
     val name: String,

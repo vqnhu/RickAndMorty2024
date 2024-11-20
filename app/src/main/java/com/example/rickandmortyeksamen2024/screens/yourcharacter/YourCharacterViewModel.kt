@@ -2,7 +2,7 @@ package com.example.rickandmortyeksamen2024.screens.yourcharacter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.rickandmortyeksamen2024.data.CreateCharacter
+import com.example.rickandmortyeksamen2024.data.data_classes.CreateCharacter
 import com.example.rickandmortyeksamen2024.data.room.CharacterRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,6 @@ class YourCharacterViewModel : ViewModel() {
 
     private val _characters = MutableStateFlow<List<CreateCharacter>>(emptyList())
 
-    // val characters: StateFlow<List<CreateCharacter>> get() = _characters
     val characters = _characters.asStateFlow()
 
     // oppdaterer karakterene fra grensesnitt
@@ -28,20 +27,19 @@ class YourCharacterViewModel : ViewModel() {
         _characters.value = CharacterRepository.getCharacters()
     }
 
-
     fun deleteCharacter(character: CreateCharacter) {
         viewModelScope.launch(Dispatchers.IO) {
 
-            val numberDeleted = CharacterRepository.deleteCharacter(character) // slette fra databasen
+            val numberDeleted = CharacterRepository.deleteCharacter(character)
             if (numberDeleted == 1) {
-                val currentList = _characters.value // den linjen her sletter fra databasen, men oppdaterer ikke grensensnittet
+                val currentList = _characters.value // sletter fra databasen
                 val afterDeleteList = currentList.filter { it != character } // sletter en karakter fra grensesnittet
                 _characters.value = afterDeleteList
             }
         }
     }
 
-    fun deleteAllCharacter() {
+    fun deleteAllCharacters() {
         viewModelScope.launch(Dispatchers.IO) {
 
             val numberDeleted =

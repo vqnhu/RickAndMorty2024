@@ -22,7 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.example.rickandmortyeksamen2024.data.Character
+import com.example.rickandmortyeksamen2024.data.data_classes.Character
 
 @Composable
 fun CharacterItem(character: Character) {
@@ -35,25 +35,22 @@ fun CharacterItem(character: Character) {
             .padding(16.dp), // Innvendig padding for boksen
 
     ) {
-        // inne i kortet er det et Column for å ordne innholdet vertikalt
+        // Inne i kortet er det et Column for å ordne innholdet vertikalt
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()
             ) {
-            // Bilde til venstre
+
             AsyncImage( // Async laste bilder asynkront, spesielt fra nettverkskilder. Den håndterer innlasting, caching og feil automatisk.
                 model = character.image,
                 contentDescription = "Image of ${character.name}",
                 modifier = Modifier
-                    .size(130.dp) // Størrelse på bildet
+                    .size(130.dp)
                     .clip(RoundedCornerShape(24.dp)) // "klipper" bildet og gjør bildet rund
 
             )
 
-            Spacer(modifier = Modifier.width(8.dp)) // Plass mellom bildet og teksten
-
-            // Informasjon om karakteren til høyre
-
+            Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = character.name,
                     fontSize = 24.sp,

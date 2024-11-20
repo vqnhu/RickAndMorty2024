@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface RickAndMortyService {
     @GET("character/?format=json")
-    suspend fun getAllCharacters(): Response<CharacterList> // This fetches all characters
+    suspend fun getAllCharacters(): Response<CharacterList> // Dette henter alle karakterer
 }

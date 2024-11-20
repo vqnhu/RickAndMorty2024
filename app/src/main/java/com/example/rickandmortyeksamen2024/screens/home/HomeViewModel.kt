@@ -13,8 +13,4 @@ class HomeViewModel : ViewModel() {
 
     var image = R.drawable.ricknmortyy
 
-    fun updateTitle(newTitle: String) {
-        title = newTitle
-    }
-
 }

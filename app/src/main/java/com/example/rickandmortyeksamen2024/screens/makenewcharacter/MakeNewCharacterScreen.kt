@@ -41,7 +41,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rickandmortyeksamen2024.R
-import com.example.rickandmortyeksamen2024.data.CreateCharacter
+import com.example.rickandmortyeksamen2024.data.data_classes.CreateCharacter
 import kotlinx.coroutines.delay
 
 @Composable
@@ -59,10 +59,11 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
     var statusError by remember { mutableStateOf(false) }
     var imageError by remember { mutableStateOf(false) }
 
-    // for å scrolle på siden
+    // For å kunne scrolle på siden
     val scrollState = rememberScrollState()
 
     // Bilder av karakterer brukeren kan velge
+    // Karakterene er hentet fra "https://rickandmorty.fandom.com/wiki/Rickipedia"
     val images = listOf(
         R.drawable.calypso,
         R.drawable.noob,
@@ -98,15 +99,16 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)
             )
 
+            // Tekstfelt for navn
             TextField(
                 value = name,
-                onValueChange = // det bruker taster inn
+                onValueChange =
                 {
                     name = it
-                    nameError = it.isBlank() // Blir "true" hvis feltet er tomt
+                    nameError = it.isBlank()
                 },
                 label = { Text("Navn") },
-                isError = nameError, // Behandler Error
+                isError = nameError,
 
             )
 
@@ -117,7 +119,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 )
             }
 
-
+            // Tekstfelt for type
             TextField(
                 value = species,
                 onValueChange =
@@ -138,6 +140,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 )
             }
 
+            // Radioknapp for status "Alive" og "Dead"
             Text(
                 text = "Status: ",
                 color = Color.White,
@@ -230,9 +233,9 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 )
             }
 
-            Spacer(modifier = Modifier.height(50.dp)) // mellomrom mellom bildene og knappen
+            Spacer(modifier = Modifier.height(50.dp))
 
-            // Lagre knappen
+            // Lagre karakter knappen
             Button(
                 colors = ButtonDefaults.buttonColors(containerColor = Color(13, 56, 52, 255)),
                 onClick = {
@@ -249,7 +252,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                         name = name,
                         species = species,
                         status = status,
-                        image = selectedImage!! // legg inn kommentar
+                        image = selectedImage?: return@Button // Hvis selectedImage er null, stopp funksjonen
                     )
                     makeNewCharacterViewModel.insertCharachter(newCharacter)
                     name = ""
@@ -291,7 +294,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                         tint = Color.White
                     )
                     Text(
-                        text = "Karakter lagret til dine karakterer",
+                        text = "Karakteren er blitt lagret!",
                         color = Color.White,
                         modifier = Modifier.padding(start = 8.dp)
 

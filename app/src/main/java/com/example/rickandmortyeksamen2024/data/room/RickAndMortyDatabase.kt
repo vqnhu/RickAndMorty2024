@@ -2,7 +2,7 @@ package com.example.rickandmortyeksamen2024.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.rickandmortyeksamen2024.data.CreateCharacter
+import com.example.rickandmortyeksamen2024.data.data_classes.CreateCharacter
 
 @Database(
     entities = [CreateCharacter::class],

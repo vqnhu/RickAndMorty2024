@@ -4,7 +4,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.rickandmortyeksamen2024.data.CreateCharacter
+import com.example.rickandmortyeksamen2024.data.data_classes.CreateCharacter
 
 @Composable
 fun DeleteCharacterDialog(
@@ -29,12 +29,12 @@ fun DeleteCharacterDialog(
             },
             confirmButton = {
                 TextButton(onClick = onConfirm) {
-                    Text("Ja", color = Color(0,0,0,)) // Green color for confirmation
+                    Text("Ja", color = Color(0,0,0,))
                 }
             },
             dismissButton = {
                 TextButton(onClick = onDismiss) {
-                    Text("Nei", color = Color(0,0,0)) // Neutral color for cancellation
+                    Text("Nei", color = Color(0,0,0))
                 }
             },
             modifier = Modifier.padding(16.dp),
