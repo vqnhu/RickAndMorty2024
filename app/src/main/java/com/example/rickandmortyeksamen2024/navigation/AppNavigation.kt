@@ -36,7 +36,6 @@ import com.example.rickandmortyeksamen2024.screens.showcharacter.ShowCharacterSc
 import com.example.rickandmortyeksamen2024.screens.showcharacter.ShowCharacterViewModel
 import com.example.rickandmortyeksamen2024.screens.yourcharacter.YourCharacterScreen
 import com.example.rickandmortyeksamen2024.screens.yourcharacter.YourCharacterViewModel
-import kotlinx.serialization.Serializable
 
 @Composable
 fun AppNavigation(
