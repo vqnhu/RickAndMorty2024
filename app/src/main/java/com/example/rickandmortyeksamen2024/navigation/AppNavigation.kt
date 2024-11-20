@@ -38,18 +38,6 @@ import com.example.rickandmortyeksamen2024.screens.yourcharacter.YourCharacterSc
 import com.example.rickandmortyeksamen2024.screens.yourcharacter.YourCharacterViewModel
 import kotlinx.serialization.Serializable
 
-@Serializable
-object Home
-
-@Serializable
-object ShowCharacter
-
-@Serializable
-object MakeCharacter
-
-@Serializable
-object YourCharacter
-
 @Composable
 fun AppNavigation(
     homeViewModel: HomeViewModel,
