@@ -62,7 +62,7 @@ fun AppNavigation(
         mutableStateOf(0)
     }
 
-    // Henter den nåværendedelen av skjermen
+    // Henter den nåværendelen av skjermen
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     // Henter inn hvilket skjetm som er valgt
     val currentDestination = currentBackStackEntry?.destination?.route
@@ -71,110 +71,110 @@ fun AppNavigation(
         bottomBar = {
             // Hvis nåværende skjerm ikke er hjem -> vis navigasjonsbaren
             if (currentDestination != "home") {
-            NavigationBar(
-                containerColor = Color(0, 150, 136, 255),
-                contentColor = Color.White
-            ) {
-                // Skjerm -> Hjem
-                NavigationBarItem(
-                    selected = currentDestination == "home",
-                    onClick = {
-                        navController.navigate("home")
-                    },
-                    icon = {
-                        if (currentDestination == "home") {
-                            Icon(
-                                imageVector = Icons.Filled.Home,
-                                contentDescription = null
-                            )
-                        } else {
-                            Icon(
-                                imageVector = Icons.Outlined.Home,
-                                contentDescription = null
-                            )
+                NavigationBar(
+                    containerColor = Color(0, 150, 136, 255),
+                    contentColor = Color.White
+                ) {
+                    // Skjerm -> Hjem
+                    NavigationBarItem(
+                        selected = currentDestination == "home",
+                        onClick = {
+                            navController.navigate("home")
+                        },
+                        icon = {
+                            if (currentDestination == "home") {
+                                Icon(
+                                    imageVector = Icons.Filled.Home,
+                                    contentDescription = null
+                                )
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Outlined.Home,
+                                    contentDescription = null
+                                )
+                            }
+                        },
+                        label = {
+                            Text(text = "Hjem")
                         }
-                    },
-                    label = {
-                        Text(text = "Hjem")
-                    }
-                )
+                    )
 
-                // Skjerm - Vise alle karakterene
-                NavigationBarItem(
-                    selected = chosenScreen == 1,
-                    onClick = {
-                        chosenScreen = 1
-                        navController.navigate("show_character")
-                    },
-                    icon = {
-                        if (chosenScreen == 1) {
-                            Icon(
-                                imageVector = Icons.Filled.Face,
-                                contentDescription = null
-                            )
-                        } else {
-                            Icon(
-                                imageVector = Icons.Outlined.Face,
-                                contentDescription = null
-                            )
+                    // Skjerm - Vise alle karakterene
+                    NavigationBarItem(
+                        selected = chosenScreen == 1,
+                        onClick = {
+                            chosenScreen = 1
+                            navController.navigate("show_character")
+                        },
+                        icon = {
+                            if (chosenScreen == 1) {
+                                Icon(
+                                    imageVector = Icons.Filled.Face,
+                                    contentDescription = null
+                                )
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Outlined.Face,
+                                    contentDescription = null
+                                )
+                            }
+                        },
+                        label = {
+                            Text(text = "Alle karakterer")
                         }
-                    },
-                    label = {
-                        Text(text = "Alle karakterer")
-                    }
-                )
+                    )
 
-                // Skjerm - Lage karakter
-                NavigationBarItem(
-                    selected = chosenScreen == 2,
-                    onClick = {
-                        chosenScreen = 2
-                        navController.navigate("make_character")
-                    },
-                    icon = {
-                        if (chosenScreen == 2) {
-                            Icon(
-                                imageVector = Icons.Filled.Create,
-                                contentDescription = null
-                            )
-                        } else {
-                            Icon(
-                                imageVector = Icons.Outlined.Create,
-                                contentDescription = null
-                            )
+                    // Skjerm - Lage karakter
+                    NavigationBarItem(
+                        selected = chosenScreen == 2,
+                        onClick = {
+                            chosenScreen = 2
+                            navController.navigate("make_character")
+                        },
+                        icon = {
+                            if (chosenScreen == 2) {
+                                Icon(
+                                    imageVector = Icons.Filled.Create,
+                                    contentDescription = null
+                                )
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Outlined.Create,
+                                    contentDescription = null
+                                )
+                            }
+
+                        },
+                        label = {
+                            Text(text = "Lage karakterer")
                         }
+                    )
 
-                    },
-                    label = {
-                        Text(text = "Lage karakter")
-                    }
-                )
-
-                // Skjerm - Dine karakterer
-                NavigationBarItem(
-                    selected = chosenScreen == 3,
-                    onClick = {
-                        chosenScreen = 3
-                        navController.navigate("your_character")
-                    },
-                    icon = {
-                        if (chosenScreen == 3) {
-                            Icon(
-                                imageVector = Icons.Filled.Build,
-                                contentDescription = null
-                            )
-                        } else {
-                            Icon(
-                                imageVector = Icons.Outlined.Build,
-                                contentDescription = null
-                            )
+                    // Skjerm - Dine karakterer
+                    NavigationBarItem(
+                        selected = chosenScreen == 3,
+                        onClick = {
+                            chosenScreen = 3
+                            navController.navigate("your_character")
+                        },
+                        icon = {
+                            if (chosenScreen == 3) {
+                                Icon(
+                                    imageVector = Icons.Filled.Build,
+                                    contentDescription = null
+                                )
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Outlined.Build,
+                                    contentDescription = null
+                                )
+                            }
+                        },
+                        label = {
+                            Text(text = "Dine karakterer")
                         }
-                    },
-                    label = {
-                        Text(text = "Dine karakterer")
-                    }
-                )
-            }
+                    )
+                }
             }
         }
     ) { innerPadding ->
@@ -189,7 +189,7 @@ fun AppNavigation(
                 startDestination = "home"
             )
             {
-               composable("home") {
+                composable("home") {
                     HomeScreen(navigateToScreen = { screen -> navController.navigate(screen) })
                 }
                 composable("show_character") {

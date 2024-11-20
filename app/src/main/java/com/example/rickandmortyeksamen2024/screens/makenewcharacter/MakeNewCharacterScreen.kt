@@ -47,13 +47,14 @@ import kotlinx.coroutines.delay
 @Composable
 fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel) {
 
+    // Tilstander
     var name by remember { mutableStateOf("") }
     var species by remember { mutableStateOf("") }
     var status by remember { mutableStateOf("") }
     var selectedImage by remember { mutableStateOf<Int?>(null) }
     var message by remember { mutableStateOf(false) } // Meldingen til brukeren om at karakteren er lagret
 
-    // Error handling for feltene 
+    // Error handling
     var nameError by remember { mutableStateOf(false) }
     var speciesError by remember { mutableStateOf(false) }
     var statusError by remember { mutableStateOf(false) }
@@ -92,8 +93,9 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 .background(Color(31, 31, 34, 255))
                 .padding(8.dp)
         ) {
+            // Tittel
             Text(
-                text = "Lag din egen karakter",
+                text = "Lage karakter",
                 color = Color(195, 214, 0),
                 fontSize = 30.sp,
                 modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)
@@ -112,6 +114,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
 
             )
 
+            // Hvis felter er tomt vis "Navn er påkrevd"
             if (nameError) {
                 Text(
                     text = "Navn er påkrevd",
@@ -133,6 +136,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
 
             )
 
+            // Hvis felter er tomt vis "Type er påkrevd"
             if (speciesError) {
                 Text(
                     text = "Type er påkrevd",
@@ -140,7 +144,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 )
             }
 
-            // Radioknapp for status "Alive" og "Dead"
+
             Text(
                 text = "Status: ",
                 color = Color.White,
@@ -151,6 +155,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 modifier = Modifier.padding(8.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                // Radioknapp for status "Alive" og "Dead"
                 RadioButton(
                     selected = (status == "Alive"),
                     onClick = {
@@ -173,6 +178,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
 
             }
 
+            // Hvis felter er tomt vis "Status er påkrevd"
             if (statusError) {
                 Text(
                     text = "Status er påkrevd",
@@ -195,7 +201,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 modifier = Modifier.height(400.dp)
 
                 ) {
-                // items for å itirere gjennom bildene
+                // Itirere gjennom bildene
                 items(images) { image ->
                     Box(
                         modifier = Modifier
@@ -226,6 +232,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                 }
             }
 
+            // Hvis felter er tomt vis "Bildevalg er påkrevd"
             if (imageError) {
                 Text(
                     text = "Bildevalg er påkrevd",
@@ -244,6 +251,7 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
                     statusError = status.isBlank()
                     imageError = (selectedImage == null)
 
+                    // Hvis en av feltene er true -> stoppes videreutførelse av "Button"
                     if (nameError || speciesError || statusError || imageError) {
                         return@Button
                     }
@@ -265,11 +273,12 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
             )
 
             {
-                Text(text = "Lagre karakter")
+                Text(text = "Lagre karakterer")
 
             }
         }
 
+        // Animasjon for tekstboksen når karakten er laget
         AnimatedVisibility(
             visible = message,
             enter = fadeIn(),
@@ -303,9 +312,10 @@ fun MakeNewCharacterScreen(makeNewCharacterViewModel: MakeNewCharacterViewModel)
             }
         }
 
+        // Fjerner meldingen etter 2 sek.
         if (message == true) {
             LaunchedEffect(Unit) {
-                delay(1500L)
+                delay(2000L)
                 message = false
             }
         }

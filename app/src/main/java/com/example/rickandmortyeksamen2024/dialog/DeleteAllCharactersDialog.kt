@@ -30,12 +30,12 @@ fun DeleteAllCharactersDialog(
 
         confirmButton = {
             TextButton(onClick = onConfirm) {
-                Text("Ja", color = Color(0,0,0))
+                Text("Ja", color = Color(0, 0, 0))
             }
         },
         dismissButton = {
             TextButton(onClick = onDismiss) {
-                Text("Nei", color = Color(0,0,0,))
+                Text("Nei", color = Color(0, 0, 0))
             }
         },
         modifier = Modifier.padding(16.dp),

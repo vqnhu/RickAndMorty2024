@@ -34,6 +34,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
 
+    // Tilstander
     val characters = yourCharacterViewModel.characters.collectAsState()
     var showDeleteDialog by remember { mutableStateOf(false) }
     var showDeleteAllDialog by remember { mutableStateOf(false) }
@@ -43,6 +44,7 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
 
     val coroutineScope = rememberCoroutineScope()
 
+    // simulere lasting av data
     LaunchedEffect(Unit) {
         isLoading = true
         delay(3000L)
@@ -50,10 +52,12 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
-        Column(modifier = Modifier
-            .fillMaxSize()
-            .background(Color(13, 56, 52, 255))
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(13, 56, 52, 255))
         ) {
+            // Tittel
             Text(
                 text = "Dine karakterer",
                 color = Color(195, 214, 0),
@@ -63,13 +67,14 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                     .padding(8.dp),
                 textAlign = TextAlign.Center
 
-                )
+            )
 
+            // Vis denne meldingen "Laster inn karakterene..." mens "LauchedEffect" pågår
             if (isLoading) {
                 Text("Laster inn karakterene...")
             } else {
 
-                // Hvis ingen karakterer vises, vis denne meldingen
+                // Hvis ingen karakterer er funnet vis "Ingen karakter er tilgjengelig"
                 if (characters.value.isEmpty()) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
@@ -87,6 +92,7 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                     modifier = Modifier.weight(1f),
                     contentPadding = PaddingValues(bottom = 100.dp)
                 ) {
+                    // Key brukes for å gi hvert element et unikt nøkkel
                     items(characters.value, key = { it.id }) { character ->
                         CreateCharacterItem(
                             character,
@@ -98,12 +104,12 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                     }
                 }
 
-                // Knapp for å slette ALLE karakterene
                 Box(
                     modifier = Modifier.fillMaxWidth(),
                     contentAlignment = Alignment.Center
 
                 ) {
+                    // Knapp for å slette ALLE karakterene
                     Button(
                         onClick = {
                             showDeleteAllDialog = true
@@ -113,7 +119,14 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                             .padding(16.dp)
                             .height(50.dp),
                         shape = MaterialTheme.shapes.large,
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(207, 33, 16, 255)),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(
+                                207,
+                                33,
+                                16,
+                                255
+                            )
+                        ),
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Delete,
@@ -126,17 +139,17 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                     }
                 }
             }
-
         }
         // Dialog for å slette EN karakter
         if (showDeleteDialog) {
             DeleteCharacterDialog(
                 characterToDelete = characterToDelete,
                 onConfirm = {
-                    characterToDelete?.let { yourCharacterViewModel.deleteCharacter(it)
+                    characterToDelete?.let {
+                        yourCharacterViewModel.deleteCharacter(it)
                         coroutineScope.launch {
                             message = "${it.name} ble slettet!"
-                            delay(2000)
+                            delay(2000) // Vises meldingen i 2 sek.
                             message = ""
                         }
                     }
@@ -157,7 +170,7 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                     yourCharacterViewModel.deleteAllCharacters()
                     coroutineScope.launch {
                         message = "Alle karakterene ble slettet!"
-                        delay(2000)
+                        delay(2000) // Vises meldingen i 2 sek.
                         message = ""
                     }
                     showDeleteAllDialog = false
@@ -178,14 +191,14 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(Color(0, 0, 0, 107)) // transparang bakgrunn
-                            .align(Alignment.Center) // Align to center
+                            .background(Color(0, 0, 0, 107))
+                            .align(Alignment.Center)
                     ) {
                         Row(
                             modifier = Modifier
                                 .background(
                                     color = Color(13, 56, 52, 255),
-                                    shape = MaterialTheme.shapes.medium // Rounded corners
+                                    shape = MaterialTheme.shapes.medium
                                 )
                                 .padding(16.dp)
                                 .align(Alignment.Center),
@@ -197,7 +210,7 @@ fun YourCharacterScreen(yourCharacterViewModel: YourCharacterViewModel) {
                                 tint = Color.White,
                                 modifier = Modifier.size(24.dp)
                             )
-                            Spacer(modifier = Modifier.width(8.dp)) // Spacing between icon and text
+                            Spacer(modifier = Modifier.width(8.dp)) // Spacer for å lage mellomrom mellom ikon og tekst
                             Text(
                                 text = message,
                                 style = MaterialTheme.typography.bodyLarge.copy(color = Color.White),

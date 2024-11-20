@@ -14,13 +14,15 @@ class ShowCharacterViewModel : ViewModel() {
     private val _showCharacters = MutableStateFlow<List<Character>>(emptyList())
     val showCharacters = _showCharacters.asStateFlow()
 
-    init{
+    // Viser karaktene på skjermen når man navigerer til skjermen
+    init {
         viewModelScope.launch {
             getAllCharacters()
         }
     }
 
-      private fun getAllCharacters() {
+    // Hente alle karakterene
+    private fun getAllCharacters() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 _showCharacters.value = RickAndMortyRepository.getAllCharacters()

@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Initialisere databasen
         CharacterRepository.initializeDatabase(applicationContext)
 
         enableEdgeToEdge()
@@ -49,13 +50,11 @@ class MainActivity : ComponentActivity() {
                             _showCharacterViewModel,
                             _yourCharacterViewModel
                         )
-
                     }
                 }
             }
         }
     }
-
 }
 
 

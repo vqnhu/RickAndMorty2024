@@ -15,7 +15,7 @@ class YourCharacterViewModel : ViewModel() {
 
     val characters = _characters.asStateFlow()
 
-    // oppdaterer karakterene fra grensesnitt
+    // Viser karaktene på skjermen når man navigerer til skjermen
     init {
         viewModelScope.launch {
             loadCharacters()
@@ -27,18 +27,21 @@ class YourCharacterViewModel : ViewModel() {
         _characters.value = CharacterRepository.getCharacters()
     }
 
+    // Slette en karakter
     fun deleteCharacter(character: CreateCharacter) {
         viewModelScope.launch(Dispatchers.IO) {
 
             val numberDeleted = CharacterRepository.deleteCharacter(character)
             if (numberDeleted == 1) {
                 val currentList = _characters.value // sletter fra databasen
-                val afterDeleteList = currentList.filter { it != character } // sletter en karakter fra grensesnittet
+                val afterDeleteList =
+                    currentList.filter { it != character } // sletter en karakter fra grensesnittet
                 _characters.value = afterDeleteList
             }
         }
     }
 
+    // Slette alle karakterene
     fun deleteAllCharacters() {
         viewModelScope.launch(Dispatchers.IO) {
 

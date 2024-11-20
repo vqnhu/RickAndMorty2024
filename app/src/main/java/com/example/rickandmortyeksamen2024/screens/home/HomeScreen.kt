@@ -29,6 +29,7 @@ fun HomeScreen(navigateToScreen: (String) -> Unit) {
     val viewModel: HomeViewModel = viewModel()
 
     Box(modifier = Modifier.fillMaxSize()) {
+        // Hjem skjerm bilde/bakgrunn
         Image(
             painter = painterResource(id = viewModel.image),
             contentDescription = null,
@@ -37,6 +38,8 @@ fun HomeScreen(navigateToScreen: (String) -> Unit) {
                 .clip(MaterialTheme.shapes.medium)
 
         )
+
+        // Tittel
         Text(
             text = viewModel.title,
             style = TextStyle(
@@ -77,7 +80,7 @@ fun HomeScreen(navigateToScreen: (String) -> Unit) {
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0, 139, 119))
             ) {
                 Text(
-                    text = "Lage Karakter",
+                    text = "Lage Karakterer",
                     color = Color.White
                 )
             }

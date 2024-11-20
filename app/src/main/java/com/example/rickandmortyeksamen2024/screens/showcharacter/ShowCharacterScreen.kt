@@ -34,14 +34,12 @@ fun ShowCharacterScreen(showCharacterViewModel: ShowCharacterViewModel) {
         isLoading = false
     }
 
-
-    // jobbe med grensesnitt
-    Box( // denne boksen endrer bakgrunnfarge på skjermen
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color(13, 56, 52, 255))
 
-    ){
+    ) {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
@@ -50,19 +48,19 @@ fun ShowCharacterScreen(showCharacterViewModel: ShowCharacterViewModel) {
                 text = "Rick and Morty karakterer",
                 fontSize = 30.sp,
                 color = Color(195, 214, 0),
-                )
+            )
 
+            // Venter til "LaucheedEffect" er ferdig så viser karakterene
             if (isLoading) {
                 Text("Laster inn karakerene....")
-            }else{
-                // Bruker LazyColumn for å liste karakterene
+            } else {
+
                 LazyColumn {
                     items(showCharacters) { character ->
-                        CharacterItem(character) // Passer karakteren til en egen komponent
+                        CharacterItem(character)
                     }
                 }
             }
-
 
 
         }

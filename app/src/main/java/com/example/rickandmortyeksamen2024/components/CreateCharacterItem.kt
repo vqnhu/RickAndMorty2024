@@ -27,13 +27,16 @@ fun CreateCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)
         modifier = Modifier
             .fillMaxWidth()
             .padding(12.dp)
-            .background(Color(0, 139, 119), shape = RoundedCornerShape(16.dp)) // Runder av hjørnet på kortet
+            .background(
+                Color(0, 139, 119),
+                shape = RoundedCornerShape(16.dp)
+            )
             .border(2.dp, Color(195, 214, 0), RoundedCornerShape(16.dp))
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween // Mellomrom mellom bilde, tekst og knapp
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        // Bilde av karakten
+        // Bilde av karakteren
         Image(
             painter = painterResource(id = deleteCharacter.image),
             contentDescription = "${deleteCharacter.name} Image",
@@ -46,11 +49,23 @@ fun CreateCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)
         Column(
             modifier = Modifier
                 .padding(start = 12.dp)
-                .weight(1f) // Take up remaining space in the row
+                .weight(1f)
         ) {
-            Text("Navn: ${deleteCharacter.name}", style = MaterialTheme.typography.headlineSmall, color = Color(195, 214, 0),)
-            Text("Type: ${deleteCharacter.species}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
-            Text("Status: ${deleteCharacter.status}", style = MaterialTheme.typography.bodyMedium, color = Color.White)
+            Text(
+                "Navn: ${deleteCharacter.name}",
+                style = MaterialTheme.typography.headlineSmall,
+                color = Color(195, 214, 0),
+            )
+            Text(
+                "Type: ${deleteCharacter.species}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White
+            )
+            Text(
+                "Status: ${deleteCharacter.status}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White
+            )
         }
 
 
@@ -60,13 +75,16 @@ fun CreateCharacterItem(deleteCharacter: CreateCharacter, onDelete: (() -> Unit)
                 onClick = onDelete,
                 modifier = Modifier
                     .size(40.dp)
-                    .background(Color(216, 66, 66, 255), CircleShape) // Red background with rounded corners
-                    .padding(8.dp) // Padding inside the button
+                    .background(
+                        Color(216, 66, 66, 255),
+                        CircleShape
+                    )
+                    .padding(8.dp)
             ) {
                 Icon(
                     imageVector = Icons.Filled.Delete,
                     contentDescription = "Delete ${deleteCharacter.name}",
-                    tint = Color.White // White icon for contrast
+                    tint = Color.White
                 )
             }
         }

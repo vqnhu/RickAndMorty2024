@@ -30,39 +30,38 @@ fun CharacterItem(character: Character) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .background(Color(0, 139, 119), shape = RoundedCornerShape(16.dp)) // Bakgrunnsfarge for boksen
-            .border(4.dp, Color(195, 214, 0), RoundedCornerShape(16.dp)) // lager en border rundt kortet og styler den gul
-            .padding(16.dp), // Innvendig padding for boksen
+            .background(Color(0, 139, 119), shape = RoundedCornerShape(16.dp))
+            .border(4.dp, Color(195, 214, 0), RoundedCornerShape(16.dp))
+            .padding(16.dp),
 
-    ) {
+        ) {
         // Inne i kortet er det et Column for å ordne innholdet vertikalt
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()
-            ) {
-
-            AsyncImage( // Async laste bilder asynkront, spesielt fra nettverkskilder. Den håndterer innlasting, caching og feil automatisk.
+        ) {
+            // Async laste bilder asynkront, spesielt fra nettverkskilder. Den håndterer innlasting, caching og feil automatisk
+            AsyncImage(
                 model = character.image,
                 contentDescription = "Image of ${character.name}",
                 modifier = Modifier
                     .size(130.dp)
-                    .clip(RoundedCornerShape(24.dp)) // "klipper" bildet og gjør bildet rund
-
+                    .clip(RoundedCornerShape(24.dp))
             )
 
             Spacer(modifier = Modifier.width(8.dp))
-                Text(
-                    text = character.name,
-                    fontSize = 24.sp,
-                    color = Color(195, 214, 0),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = character.species,
-                    fontSize = 16.sp,
-                    color = Color.White,
-                    textAlign = TextAlign.Center
-                )
+            Text(
+                text = character.name,
+                fontSize = 24.sp,
+                color = Color(195, 214, 0),
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = character.species,
+                fontSize = 16.sp,
+                color = Color.White,
+                textAlign = TextAlign.Center
+            )
             Text(
                 text = character.status,
                 fontSize = 16.sp,

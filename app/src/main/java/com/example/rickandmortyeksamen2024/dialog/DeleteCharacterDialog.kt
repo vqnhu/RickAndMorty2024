@@ -9,8 +9,8 @@ import com.example.rickandmortyeksamen2024.data.data_classes.CreateCharacter
 @Composable
 fun DeleteCharacterDialog(
     characterToDelete: CreateCharacter?,
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit
+    onConfirm: () -> Unit, // Lambda funskjon for bekreftelse
+    onDismiss: () -> Unit // Lambda funskjon for å avvise dialogen
 ) {
     if (characterToDelete != null) {
         AlertDialog(
@@ -29,12 +29,12 @@ fun DeleteCharacterDialog(
             },
             confirmButton = {
                 TextButton(onClick = onConfirm) {
-                    Text("Ja", color = Color(0,0,0,))
+                    Text("Ja", color = Color(0, 0, 0))
                 }
             },
             dismissButton = {
                 TextButton(onClick = onDismiss) {
-                    Text("Nei", color = Color(0,0,0))
+                    Text("Nei", color = Color(0, 0, 0))
                 }
             },
             modifier = Modifier.padding(16.dp),
